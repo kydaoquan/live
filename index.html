@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Điều khiển</title>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<style>
+body {
+  margin:0;
+  font-family:Arial;
+  background:#111;
+  color:white;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  gap:20px;
+}
+
+input {
+  width:90%;
+  padding:15px;
+  font-size:18px;
+  border:none;
+  border-radius:10px;
+}
+
+button {
+  width:90%;
+  padding:15px;
+  font-size:20px;
+  border:none;
+  border-radius:10px;
+  background:#00c853;
+  color:white;
+}
+
+.redBtn {
+  background:#ff3b3b;
+}
+
+.blueBtn {
+  background:#2979ff;
+}
+</style>
+</head>
+
+<body>
+
+<h2>🎮 Điều khiển livestream</h2>
+
+<input id="input1" placeholder="Tên đỏ">
+<button class="redBtn" onclick="setRed()">Cập nhật Đỏ</button>
+
+<input id="input2" placeholder="Tên xanh">
+<button class="blueBtn" onclick="setBlue()">Cập nhật Xanh</button>
+
+<button onclick="reset()">Reset</button>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCm62HBdHOtdlBxXqhV6aMtznDQOykShjQ",
+  authDomain: "quocdang1-7e50b.firebaseapp.com",
+  databaseURL: "https://quocdang1-7e50b-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "quocdang1-7e50b",
+  storageBucket: "quocdang1-7e50b.firebasestorage.app",
+  messagingSenderId: "30464017854",
+  appId: "1:30464017854:web:37d3193bf65aacb4aee5ef"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+function setRed() {
+  const val = document.getElementById("input1").value;
+  db.ref("live/red").set(val);
+}
+
+function setBlue() {
+  const val = document.getElementById("input2").value;
+  db.ref("live/blue").set(val);
+}
+
+function reset() {
+  db.ref("live").set({
+    red: "Đỏ",
+    blue: "Xanh"
+  });
+}
+</script>
+
+</body>
+</html>
