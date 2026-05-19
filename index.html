@@ -1,1 +1,36 @@
+function startStream() {
+    const idInput = document.getElementById('channel-id').value.trim();
+    const qualityInput = document.getElementById('stream-quality').value;
+    let customBitrate = document.getElementById('stream-bitrate').value.trim();
+    
+    if (!idInput) { alert('Nhập ID vào đã mày ơi!'); return; }
 
+    const mainContainer = document.getElementById('main-container');
+    const iframe = document.getElementById('stream-iframe');
+    const btnClose = document.getElementById('btn-close');
+
+    let width = 1920; let height = 1080;
+    if (qualityInput === 'hd') { width = 1280; height = 720; } 
+    else if (qualityInput === '2k') { width = 2560; height = 1440; }
+
+    // 🕵️‍♂️ BÙA CHÚ Ở ĐÂY: Chuỗi này giải mã ra sẽ thành "https://vdo.ninja/"
+    const secretBase = atob("aHR0cHM6Ly92ZG8ubmluamEv"); 
+    
+    // Ghép link động sau khi bấm nút
+    const vdoUrl = `${secretBase}?push=${idInput}&facing=back&width=${width}&height=${height}&videobitrate=${customBitrate}&scale=100&autostart=1&clean=1`;
+
+    // Bật Fullscreen
+    const docElm = document.documentElement;
+    if (docElm.requestFullscreen) docElm.requestFullscreen();
+    else if (docElm.webkitRequestFullscreen) docElm.webkitRequestFullscreen();
+
+    // Nạp link vào iframe
+    mainContainer.style.display = 'none';
+    iframe.src = vdoUrl; // Link chỉ xuất hiện ở đây khi đã chạy
+    iframe.style.display = 'block';
+    btnClose.style.display = 'flex';
+
+    if (navigator.wakeLock) {
+        navigator.wakeLock.request('screen').catch(err => console.log(err));
+    }
+}
