@@ -3,82 +3,39 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KĐQ STREAM SYSTEM</title>
+    <title>KĐQ STREAM</title>
     <style>
-        body, html { margin:0; padding:0; width:100%; height:100%; overflow:hidden; background:#0F1117; color:white; font-family:sans-serif; }
+        body, html { margin:0; width:100%; height:100%; overflow:hidden; background:#0F1117; color:white; font-family:sans-serif; }
         #main-container { width:100%; max-width:420px; height:100%; margin:auto; display:flex; flex-direction:column; justify-content:center; padding:28px; }
-        .logo-box { width:110px; height:110px; margin:0 auto 30px; border-radius:50%; background:rgba(77,128,245,.08); border:1px solid rgba(77,128,245,.3); display:flex; align-items:center; justify-content:center; }
-        .logo-box svg { width:52px; height:52px; fill:#4D80F5; }
-        .title { text-align:center; font-size:28px; font-weight:900; margin-bottom:8px; }
-        .subtitle { text-align:center; opacity:.45; font-size:14px; margin-bottom:40px; }
-        .input-group { position:relative; margin-bottom:24px; }
-        .input-label { position:absolute; top:-10px; left:18px; background:#0F1117; padding:0 8px; font-size:12px; font-weight:700; color:#4D80F5; }
-        .input, .select { width:100%; height:64px; border:none; outline:none; border-radius:18px; background:#191C24; color:white; border:1.5px solid rgba(255,255,255,.08); padding:0 20px; font-size:20px; font-weight:700; text-align:center; }
-        .start-btn { width:100%; height:60px; border:none; border-radius:18px; background:#4D80F5; color:white; font-size:18px; font-weight:800; margin-top:10px; cursor:pointer; }
-        
-        #stream-frame { position:fixed; inset:0; width:100vw; height:100vh; border:none; display:none; background:black; z-index:10; }
-        #loading { position:fixed; inset:0; background:black; z-index:15; display:none; align-items:center; justify-content:center; flex-direction:column; gap:20px; }
-        .loader { width:60px; height:60px; border-radius:50%; border:4px solid rgba(255,255,255,.1); border-top-color:#4D80F5; animation:spin 1s linear infinite; }
-        @keyframes spin { to { transform:rotate(360deg); } }
+        .input, .select { width:100%; height:64px; border:none; border-radius:18px; background:#191C24; color:white; text-align:center; font-size:20px; font-weight:700; margin-bottom:20px; }
+        .start-btn { width:100%; height:60px; border:none; border-radius:18px; background:#4D80F5; color:white; font-size:18px; font-weight:800; }
+        #stream-frame { position:fixed; inset:0; width:100vw; height:100vh; border:none; display:none; background:black; }
+        #loading { position:fixed; inset:0; background:black; z-index:15; display:none; align-items:center; justify-content:center; }
     </style>
 </head>
 <body>
-
-<div id="main-container">
-    <div class="logo-box">
-        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>
-    </div>
-    <div class="title">KĐQ STREAM SYSTEM</div>
-    <div class="subtitle">Ultra Stable Mobile Streaming</div>
-
-    <div class="input-group">
-        <div class="input-label">CHANNEL ID</div>
+    <div id="main-container">
         <input id="channel" class="input" value="quocdang" />
+        <select id="quality" class="select"><option value="1080" selected>FULL HD 1080P</option></select>
+        <button class="start-btn" onclick="startStream()">BẮT ĐẦU PHÁT</button>
     </div>
+    <div id="loading">Đang khởi tạo camera...</div>
+    <iframe id="stream-frame" allow="camera *; microphone *; autoplay *; fullscreen *; display-capture *" allowfullscreen></iframe>
 
-    <div class="input-group">
-        <div class="input-label">QUALITY</div>
-        <select id="quality" class="select">
-            <option value="720">HD 720P</option>
-            <option value="1080" selected>FULL HD 1080P</option>
-        </select>
-    </div>
-
-    <button class="start-btn" onclick="startStream()">BẮT ĐẦU PHÁT</button>
-</div>
-
-<div id="loading">
-    <div class="loader"></div>
-    <div class="loading-text">Đang khởi tạo camera...</div>
-</div>
-
-<iframe id="stream-frame" allow="camera *; microphone *; autoplay *; fullscreen *; display-capture *" allowfullscreen></iframe>
-
-<script>
-    const frame = document.getElementById("stream-frame");
-    const loading = document.getElementById("loading");
-    const mainUI = document.getElementById("main-container");
-
-    async function startStream() {
-        const channelID = document.getElementById("channel").value.trim();
-        const quality = document.getElementById("quality").value;
-        
-        // Gọi "cửa sau" từ Java để lấy domain
-        const baseUrl = typeof AndroidBridge !== 'undefined' ? AndroidBridge.getBaseUrl() : "https://vdo.ninja/";
-        
-        // Ghép link trực tiếp
-        const finalURL = `${baseUrl}?push=${channelID}&webcam&autostart&noaudio&codec=vp8&fps=30&quality=${quality}`;
-        
-        frame.src = finalURL;
-        frame.style.display = "block";
-        mainUI.style.display = "none";
-        loading.style.display = "flex";
-
-        frame.onload = () => {
-            loading.style.display = "none";
-        };
-    }
-</script>
-
+    <script>
+        async function startStream() {
+            const channel = document.getElementById("channel").value.trim();
+            const baseUrl = AndroidBridge.getBaseUrl();
+            const params = AndroidBridge.getCommonParams();
+            const finalURL = `${baseUrl}?push=${channel}&${params}&quality=${document.getElementById("quality").value}`;
+            
+            const frame = document.getElementById("stream-frame");
+            frame.src = finalURL;
+            frame.style.display = "block";
+            document.getElementById("main-container").style.display = "none";
+            document.getElementById("loading").style.display = "flex";
+            frame.onload = () => document.getElementById("loading").style.display = "none";
+        }
+    </script>
 </body>
 </html>
