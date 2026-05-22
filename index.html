@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+/>
 
 <title>KĐQ STREAM SYSTEM</title>
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -23,26 +29,36 @@ html,body{
     color:white;
 }
 
-/* ================= MAIN UI ================= */
+/* ================= MAIN ================= */
 
 #main-container{
+
     width:100%;
     max-width:420px;
-    margin:auto;
     height:100%;
+
+    margin:auto;
+
     display:flex;
     flex-direction:column;
     justify-content:center;
+
     padding:28px;
 }
 
 .logo-box{
+
     width:110px;
     height:110px;
+
     margin:0 auto 30px;
+
     border-radius:50%;
-    background:rgba(77,128,245,0.08);
-    border:1px solid rgba(77,128,245,0.3);
+
+    background:rgba(77,128,245,.08);
+
+    border:1px solid rgba(77,128,245,.3);
+
     display:flex;
     align-items:center;
     justify-content:center;
@@ -55,50 +71,76 @@ html,body{
 }
 
 .title{
+
     text-align:center;
+
     font-size:28px;
     font-weight:900;
-    margin-bottom:8px;
+
     letter-spacing:1px;
+
+    margin-bottom:8px;
 }
 
 .subtitle{
+
     text-align:center;
+
     opacity:.45;
-    margin-bottom:40px;
+
     font-size:14px;
+
+    margin-bottom:40px;
 }
 
 .input-group{
+
     position:relative;
+
     margin-bottom:24px;
 }
 
 .input-label{
+
     position:absolute;
+
     top:-10px;
     left:18px;
+
     background:#0F1117;
+
     padding:0 8px;
+
     font-size:12px;
-    color:#4D80F5;
     font-weight:700;
+
+    color:#4D80F5;
+
     z-index:2;
 }
 
 .input,
 .select{
+
     width:100%;
     height:64px;
+
     border:none;
     outline:none;
+
     border-radius:18px;
+
     background:#191C24;
+
     color:white;
+
+    border:1.5px solid rgba(255,255,255,.08);
+
     padding:0 20px;
+
     font-size:20px;
     font-weight:700;
-    border:1.5px solid rgba(255,255,255,.08);
+
     transition:.2s;
 }
 
@@ -107,26 +149,36 @@ html,body{
 }
 
 .select{
+
     appearance:none;
+
     text-align:center;
     text-align-last:center;
 }
 
 .input:focus,
 .select:focus{
+
     border-color:#4D80F5;
 }
 
 .start-btn{
+
     width:100%;
     height:60px;
+
     border:none;
     border-radius:18px;
+
     background:#4D80F5;
+
     color:white;
+
     font-size:18px;
     font-weight:800;
+
     margin-top:10px;
+
     cursor:pointer;
 }
 
@@ -134,59 +186,91 @@ html,body{
     transform:scale(.985);
 }
 
-/* ================= IFRAME ================= */
+/* ================= STREAM ================= */
 
 #stream-frame{
+
     position:fixed;
+
     inset:0;
+
     width:100vw;
     height:100vh;
+
     border:none;
+
     display:none;
+
     background:black;
+
     z-index:10;
 }
 
-/* ================= CLOSE BTN ================= */
+/* ================= CLOSE ================= */
 
 #close-btn{
+
     position:fixed;
+
     top:20px;
     left:20px;
+
     width:52px;
     height:52px;
-    border-radius:50%;
+
     border:none;
+
+    border-radius:50%;
+
     background:rgba(0,0,0,.6);
+
     color:white;
+
     font-size:22px;
+
     display:none;
+
     align-items:center;
     justify-content:center;
-    z-index:20;
+
     backdrop-filter:blur(10px);
+
+    z-index:20;
 }
 
 /* ================= LOADING ================= */
 
 #loading{
+
     position:fixed;
+
     inset:0;
+
     background:black;
+
     z-index:15;
+
     display:none;
+
     align-items:center;
     justify-content:center;
+
     flex-direction:column;
+
     gap:20px;
 }
 
 .loader{
+
     width:60px;
     height:60px;
+
     border-radius:50%;
+
     border:4px solid rgba(255,255,255,.1);
+
     border-top-color:#4D80F5;
+
     animation:spin 1s linear infinite;
 }
 
@@ -197,10 +281,14 @@ html,body{
 }
 
 .loading-text{
+
     font-size:15px;
+
     opacity:.7;
 }
+
 </style>
+
 </head>
 
 <body>
@@ -208,53 +296,92 @@ html,body{
 <div id="main-container">
 
     <div class="logo-box">
+
         <svg viewBox="0 0 24 24">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10
             10-4.48 10-10S17.52 2 12 2zm0 18c-4.42
             0-8-3.58-8-8s3.58-8 8-8
             8 3.58 8 8-3.58 8-8 8z"/>
         </svg>
+
     </div>
 
-    <div class="title">KĐQ STREAM SYSTEM</div>
-    <div class="subtitle">Ultra Stable Mobile Streaming</div>
+    <div class="title">
+        KĐQ STREAM SYSTEM
+    </div>
+
+    <div class="subtitle">
+        Ultra Stable Mobile Streaming
+    </div>
+
+    <!-- CHANNEL -->
 
     <div class="input-group">
-        <div class="input-label">CHANNEL ID</div>
+
+        <div class="input-label">
+            CHANNEL ID
+        </div>
+
         <input
-            id="channel"
-            class="input"
-            value="quocdang"
-            placeholder="Nhập ID..."
+        id="channel"
+        class="input"
+        placeholder="Nhập Channel ID..."
+        value="quocdang"
         />
+
     </div>
 
+    <!-- QUALITY -->
+
     <div class="input-group">
-        <div class="input-label">QUALITY</div>
+
+        <div class="input-label">
+            QUALITY
+        </div>
 
         <select
-            id="quality"
-            class="select"
-            onchange="changePreset()"
+        id="quality"
+        class="select"
+        onchange="changePreset()"
         >
-            <option value="720">HD 720P</option>
-            <option value="1080" selected>FULL HD 1080P</option>
-            <option value="1440">2K 1440P</option>
+
+            <option value="720">
+                HD 720P
+            </option>
+
+            <option value="1080" selected>
+                FULL HD 1080P
+            </option>
+
+            <option value="1440">
+                2K 1440P
+            </option>
+
         </select>
+
     </div>
+
+    <!-- BITRATE -->
 
     <div class="input-group">
-        <div class="input-label">BITRATE</div>
+
+        <div class="input-label">
+            BITRATE
+        </div>
 
         <input
-            id="bitrate"
-            class="input"
-            type="number"
-            value="4000"
+        id="bitrate"
+        class="input"
+        type="number"
+        value="4000"
         />
+
     </div>
 
-    <button class="start-btn" onclick="startStream()">
+    <button
+    class="start-btn"
+    onclick="startStream()"
+    >
         BẮT ĐẦU PHÁT
     </button>
 
@@ -263,37 +390,57 @@ html,body{
 <!-- LOADING -->
 
 <div id="loading">
+
     <div class="loader"></div>
-    <div class="loading-text">Đang khởi tạo camera...</div>
+
+    <div class="loading-text">
+        Đang khởi tạo camera...
+    </div>
+
 </div>
 
 <!-- CLOSE -->
 
-<button id="close-btn" onclick="stopStream()">
+<button
+id="close-btn"
+onclick="stopStream()"
+>
 ✕
 </button>
 
-<!-- IFRAME -->
+<!-- STREAM -->
 
 <iframe
-    id="stream-frame"
-    allow="camera *; microphone *; autoplay *; fullscreen *"
-    allowfullscreen>
+id="stream-frame"
+allow="camera *; microphone *; autoplay *; fullscreen *"
+allowfullscreen>
 </iframe>
 
 <script>
 
 let wakeLock = null;
 
-const frame = document.getElementById("stream-frame");
-const loading = document.getElementById("loading");
-const closeBtn = document.getElementById("close-btn");
-const mainUI = document.getElementById("main-container");
+const frame =
+document.getElementById("stream-frame");
+
+const loading =
+document.getElementById("loading");
+
+const closeBtn =
+document.getElementById("close-btn");
+
+const mainUI =
+document.getElementById("main-container");
+
+/* ================= PRESET ================= */
 
 function changePreset(){
 
-    const quality = document.getElementById("quality").value;
-    const bitrate = document.getElementById("bitrate");
+    const quality =
+    document.getElementById("quality").value;
+
+    const bitrate =
+    document.getElementById("bitrate");
 
     if(quality === "720"){
         bitrate.value = 2500;
@@ -308,41 +455,48 @@ function changePreset(){
     }
 }
 
+/* ================= WAKELOCK ================= */
+
 async function requestWakeLock(){
 
     try{
 
         if("wakeLock" in navigator){
 
-            wakeLock = await navigator.wakeLock.request("screen");
-
-            wakeLock.addEventListener("release",()=>{
-                console.log("WakeLock released");
-            });
+            wakeLock =
+            await navigator.wakeLock.request("screen");
 
         }
 
     }catch(err){
+
         console.log(err);
+
     }
 }
 
-document.addEventListener("visibilitychange", async ()=>{
+document.addEventListener(
+"visibilitychange",
+async ()=>{
 
     if(
         wakeLock !== null &&
         document.visibilityState === "visible"
     ){
 
-        wakeLock = await navigator.wakeLock.request("screen");
+        wakeLock =
+        await navigator.wakeLock.request("screen");
 
     }
 
 });
 
-function getResolutionData(){
+/* ================= RESOLUTION ================= */
 
-    const quality = document.getElementById("quality").value;
+function getResolution(){
+
+    const quality =
+    document.getElementById("quality").value;
 
     if(quality === "720"){
 
@@ -368,68 +522,173 @@ function getResolutionData(){
     };
 }
 
+/* ================= START ================= */
+
 async function startStream(){
 
-    const channel = document.getElementById("channel").value.trim();
+    const channel =
+    document.getElementById("channel")
+    .value
+    .trim();
 
-    const bitrate = document.getElementById("bitrate").value.trim();
+    const bitrate =
+    document.getElementById("bitrate")
+    .value
+    .trim();
 
     if(!channel){
 
         alert("Nhập Channel ID");
-        return;
 
+        return;
     }
 
     if(!bitrate || bitrate <= 0){
 
         alert("Bitrate không hợp lệ");
-        return;
 
+        return;
     }
 
-    const resolution = getResolutionData();
+    const resolution =
+    getResolution();
 
-    /* ===== BASE64 DOMAIN ===== */
+    /* ================= HIDE DOMAIN ================= */
 
-    const secretDomain = atob("aHR0cHM6Ly92ZG8ubmluamEv");
+    const a = "aHR0";
+    const b = "cHM6";
+    const c = "Ly92";
+    const d = "ZG8u";
+    const e = "bmlu";
+    const f = "amEv";
 
-    /* ===== VDO LINK ===== */
+    const domain =
+    atob(a+b+c+d+e+f);
 
-    const url =
-        `${secretDomain}?push=${channel}`
-        + `&webcam`
-        + `&autostart`
-        + `&noscreen`
-        + `&cleanoutput`
-        + `&transparent`
-        + `&fullscreen`
-        + `&noheader`
-        + `&label=0`
-        + `&src=1`
-        + `&noaudio`
-        + `&codec=vp8`
-        + `&fps=30`
-        + `&quality=80`
-        + `&bitrate=${bitrate}`
-        + `&width=${resolution.width}`
-        + `&height=${resolution.height}`;
+    /* ================= PARAMS ================= */
 
-    /* ===== FULLSCREEN ===== */
+    const params = [
+
+        `push=${channel}`,
+
+        "webcam",
+
+        "autostart",
+
+        "noscreen",
+
+        "cleanoutput",
+
+        "fullscreen",
+
+        "noheader",
+
+        "label=0",
+
+        "src=1",
+
+        "noaudio",
+
+        "codec=vp8",
+
+        "fps=30",
+
+        "quality=80",
+
+        `bitrate=${bitrate}`,
+
+        `width=${resolution.width}`,
+
+        `height=${resolution.height}`
+
+    ];
+
+    const finalURL =
+    domain + "?" + params.join("&");
+
+    /* ================= BLOB HIDE ================= */
+
+    const blobHTML = `
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1"
+/>
+
+<style>
+
+html,body{
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:black;
+}
+
+iframe{
+    border:none;
+    width:100vw;
+    height:100vh;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<iframe
+allow="camera *; microphone *; autoplay *; fullscreen *"
+allowfullscreen
+src="${finalURL}">
+</iframe>
+
+</body>
+
+</html>
+
+`;
+
+    const blob =
+    new Blob(
+        [blobHTML],
+        {
+            type:"text/html"
+        }
+    );
+
+    const blobURL =
+    URL.createObjectURL(blob);
+
+    /* ================= FULLSCREEN ================= */
 
     try{
 
-        if(document.documentElement.requestFullscreen){
+        if(
+            document.documentElement
+            .requestFullscreen
+        ){
 
-            await document.documentElement.requestFullscreen();
+            await
+            document.documentElement
+            .requestFullscreen();
 
         }
 
     }catch(err){
+
         console.log(err);
+
     }
 
-    /* ===== UI ===== */
+    /* ================= UI ================= */
 
     mainUI.style.display = "none";
 
@@ -437,11 +696,11 @@ async function startStream(){
 
     closeBtn.style.display = "flex";
 
-    /* ===== LOAD IFRAME ===== */
+    /* ================= LOAD ================= */
 
     setTimeout(()=>{
 
-        frame.src = url;
+        frame.src = blobURL;
 
         frame.style.display = "block";
 
@@ -453,11 +712,13 @@ async function startStream(){
 
     };
 
-    /* ===== WAKELOCK ===== */
+    /* ================= WAKELOCK ================= */
 
     requestWakeLock();
 
 }
+
+/* ================= STOP ================= */
 
 function stopStream(){
 
@@ -480,17 +741,62 @@ function stopStream(){
     if(wakeLock){
 
         wakeLock.release();
+
         wakeLock = null;
+    }
+}
+
+/* ================= BASIC PROTECT ================= */
+
+document.addEventListener(
+"contextmenu",
+e=>{
+    e.preventDefault();
+}
+);
+
+document.onkeydown = function(e){
+
+    if(e.keyCode === 123){
+        return false;
+    }
+
+    if(
+        e.ctrlKey &&
+        e.shiftKey &&
+        ['I','J','C'].includes(
+            e.key.toUpperCase()
+        )
+    ){
+        return false;
+    }
+
+    if(
+        e.ctrlKey &&
+        e.key.toUpperCase() === 'U'
+    ){
+        return false;
+    }
+
+};
+
+/* ================= DEVTOOLS DETECT ================= */
+
+setInterval(()=>{
+
+    const before = new Date();
+
+    debugger;
+
+    const after = new Date();
+
+    if(after - before > 100){
+
+        document.body.innerHTML = "";
 
     }
 
-}
-
-/* ===== DISABLE RIGHT CLICK ===== */
-
-document.addEventListener("contextmenu",e=>{
-    e.preventDefault();
-});
+},1000);
 
 </script>
 
