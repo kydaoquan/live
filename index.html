@@ -12,7 +12,18 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 <title>KĐQ STREAM SYSTEM</title>
 
 <style>
+body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden; /* Cấm không cho cuộn ngang */
+        width: 100vw;       /* Ép rộng bằng chiều ngang màn hình */
+        height: 100vh;      /* Ép cao bằng chiều dọc màn hình */
+    }
 
+    iframe, video, canvas {
+        max-width: 100%;    /* Không cho phép bất kỳ thành phần nào tràn ra ngoài */
+        height: auto;
+    }
 *{
     margin:0;
     padding:0;
